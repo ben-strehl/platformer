@@ -7,4 +7,6 @@ edition = "2021"
 opt-level = 3
 
 [dependencies]
-bevy = {features = ["dynamic"], version = "0.9.1"}
+bevy = {features = ["dynamic_linking"], version = "0.10.1"}
+bevy_rapier2d = {features = ["simd-stable", "debug-render-2d"], version = "0.21.0"}
+# bevy = {version = "0.10.1"}
