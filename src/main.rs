@@ -1,8 +1,11 @@
 use bevy::prelude::*;
 use platformer::prelude::*;
+use bevy_inspector_egui::quick::WorldInspectorPlugin;
+use bevy::input::common_conditions::input_toggle_active;
 
 fn main() {
     App::new()
+        .add_state::<GameState>()
         .insert_resource(ClearColor(Color::rgb(0.2, 0.2, 0.2)))
         .add_plugins(DefaultPlugins.set(WindowPlugin {
             primary_window: Some(Window {
@@ -18,7 +21,11 @@ fn main() {
         .add_plugin(MapPlugin)
         .add_plugin(RapierPhysicsPlugin::<NoUserData>::pixels_per_meter(16.0))
         .add_plugin(RapierDebugRenderPlugin::default())
+        .add_plugin(
+            WorldInspectorPlugin::default().run_if(input_toggle_active(false, KeyCode::I))
+            )
         .add_system(animate_sprites.in_base_set(CoreSet::PostUpdate))
+        .add_system(move_to_play.in_schedule(OnEnter(GameState::Menu)))
         .run();
 }
 
@@ -36,4 +43,10 @@ fn animate_sprites(
             };
         }
     }
+}
+
+fn move_to_play(
+    mut next_state: ResMut<NextState<GameState>>,
+) {
+    next_state.set(GameState::Play);
 }

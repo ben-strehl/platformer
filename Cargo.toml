@@ -8,5 +8,6 @@ opt-level = 3
 
 [dependencies]
 bevy = {features = ["dynamic_linking"], version = "0.10.1"}
+bevy-inspector-egui = "0.18.3"
 bevy_rapier2d = {features = ["simd-stable", "debug-render-2d"], version = "0.21.0"}
 # bevy = {version = "0.10.1"}

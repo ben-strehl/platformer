@@ -5,6 +5,7 @@ mod map;
 pub mod prelude {
     pub use bevy::prelude::*;
     pub use bevy_rapier2d::prelude::*;
+    pub use bevy_inspector_egui::prelude::*;
     pub const HEIGHT: f32 = 480.0;
     pub const WIDTH: f32 = 640.0;
 
@@ -19,5 +20,13 @@ pub mod prelude {
     pub struct AnimationIndices {
         pub first: usize,
         pub last: usize,
+    }
+
+    #[derive(States, PartialEq, Eq, Default, Clone, Debug, Hash)]
+    pub enum GameState {
+        #[default]
+        Menu,
+        Play,
+        Pause,
     }
 }
